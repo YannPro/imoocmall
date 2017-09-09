@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div id="app" class="container">
+  <h1>vue-resourse插件</h1>
+  <a href="javascript:;" class="btn btn-primary" @click="get">get请求</a>
+  <a href="javascript:;" class="btn btn-primary" @click="post">post请求</a>
+  <a href="javascript:;" class="btn btn-primary">jsonp请求</a>
+  <span class="result">{{msg}}</span>
+</div>
+<script>
+  /*Evan You推荐使用axios 不是vue-resourse*/
+  new Vue({
+    el: "#app",
+    data: {
+      msg: ''
+    },
+    mounted: function () {
+      //全局拦截器 基本结构
+      Vue.http.interceptors.push(function (request,next) {
+        next(function (response) {
+          return response
+        })
+      })
+    },
+    /*全局配置访问
+     *1、
+     http: {
+     root:"http://localhost:63342/imoocmall"
+     },
+     *2、
+     http: function(){
+     this.$http({
+     url: "package.json",
+     params:{
+     userId: "103"
+     },
+     headers: {
+     token: "123"
+     },
+     timeout:5,
+     before: function () {
+     console.log("before init");
+     }
+     }).then(function (res) {
+     this.msg = res.data
+     })
+     }*/
+    methods: {
+      get: function () {
+        axios.get("package.json",{
+
+        }).then(res=>{
+          this.msg = res.data
+        })
+      },
+      post: function () {
+        axios.post("package.json",{
+          userId: "101"
+        }).then(res=>{
+          this.msg = res.data
+        })
+      }
+    }
+  })
+</script>
+</body>
+</html>

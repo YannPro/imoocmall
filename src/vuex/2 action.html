@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vuex action</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../node_modules/vuex/dist/vuex.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>{{msg}}</h1>
+  <button @click="add">button</button>
+  <counter></counter>
+</div>
+<script>
+  const counter = {
+    template: `<div><div>{{count}}</div><p>我的名字是：{{name}}</p></div>`,
+    computed:{
+      count(){
+        return this.$store.state.count
+      },
+      name(){
+        return this.$store.state.name
+      }
+    }
+  }
+  const store = new Vuex.Store({
+    state: {
+      count: 0,
+      name: ''
+    },
+    mutations: {
+      increment(state,num){
+        state.count += num
+      },
+      updateName(state,name){
+        state.name = name
+      }
+    },
+    actions: {
+      incrementAction(context,num){
+        //相当于下面的     this.$store.commit("increment",100)
+        context.commit("increment",100)
+      }
+    }
+  })
+  new Vue({
+    el: '#app',
+    store,
+    data: {
+      msg:"使用Vuex"
+    },
+    components: {
+      counter
+    },
+    methods:{
+      add(){
+        /*this.$store.commit("increment",100)
+        this.$store.commit("updateName","张三")*/
+        this.$store.dispatch("incrementAction")
+      }
+    }
+  })
+</script>
+</body>
+</html>

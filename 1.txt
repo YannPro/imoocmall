@@ -1,0 +1,44 @@
+id 必须要有的
+ 创建    表   node这个数据库里面创建一个user表
+CREATE TABLE `node`.`user`(
+  id 字段 int(11)数据类型最大的值是11位           AUTO_INCREMENT重要
+ `id`     INT(11)                           NOT NULL AUTO_INCREMENT,
+ `username` varchar(64)	 NOT NULL ,
+  `pass` varchar(64) NOT NULL ,
+  PRIMARY KEY (`id`) // 重要: 主键
+  )
+ENGINE = InnoDB;
+
+CREATE TABLE `node`.`nav`(
+ `id`     INT(11)  NOT NULL AUTO_INCREMENT,
+ `title` varchar(64)	 NOT NULL ,
+  `navid` varchar(64) NOT NULL ,
+  `leve` varchar(64) NOT NULL ,
+  PRIMARY KEY (`id`)
+  )
+ENGINE = InnoDB CHARSET=utf8;
+
+增
+  固定代码   哪个表       key
+INSERT INTO wenzhagn (id, username, pass) VALUES (1, wulv, 123)
+
+删
+ 固定代码       删article表           因为id是唯一的   id = 0
+DELETE FROM article WHERE id = 0
+
+改     哪个表        id为15的这一条数据里 content的内容
+update user set username = 112313 where id=6666
+
+//查询shuoshuo这个表里的所有内容
+SELECT * FROM shuoshuo WHERE id = ?
+//    LIMIT 从第几条开始 查询几条
+//  order by id desc 根据id从 新 => 旧进行排序
+SELECT * FROM article order by id desc limit 0,2
+
+
+
+websocket
+    http / https
+    ws / wss
+服务器  <==> 浏览器    双向  及时通讯
+websocket 服务器也有支持还是不支持  iis8 以下不支持
