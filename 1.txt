@@ -1,4 +1,4 @@
-12id 必须要有的
+121id 必须要有的
  创建    表   node这个数据库里面创建一个user表
 CREATE TABLE `node`.`user`(
   id 字段 int(11)数据类型最大的值是11位           AUTO_INCREMENT重要
